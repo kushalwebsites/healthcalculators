@@ -1,0 +1,17 @@
+<form id="vo2Form">
+  <label for="hr">Resting Heart Rate (bpm):</label>
+  <input type="number" id="hr" required />
+  <label for="age">Age:</label>
+  <input type="number" id="age" required />
+  <button type="submit">Estimate VO2 Max</button>
+  <div id="result"></div>
+</form>
+<script>
+  document.getElementById('vo2Form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const hr = +document.getElementById('hr').value;
+    const age = +document.getElementById('age').value;
+    const vo2 = 15.3 * (220 - age) / hr;
+    document.getElementById('result').innerText = `Estimated VO2 Max: ${vo2.toFixed(2)} ml/kg/min`;
+  });
+</script>
