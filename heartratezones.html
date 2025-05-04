@@ -1,0 +1,24 @@
+<body>
+  <h1>Heart Rate Zones</h1>
+  <form id="hrForm">
+    <label for="age">Age:</label>
+    <input type="number" id="age" required />
+    <button type="submit">Calculate Zones</button>
+    <div id="result"></div>
+  </form>
+  <script>
+    document.getElementById('hrForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const age = +document.getElementById('age').value;
+      const maxHR = 220 - age;
+      const zones = [
+        `Zone 1 (50–60%): ${Math.round(maxHR*0.5)}–${Math.round(maxHR*0.6)} bpm`,
+        `Zone 2 (60–70%): ${Math.round(maxHR*0.6)}–${Math.round(maxHR*0.7)} bpm`,
+        `Zone 3 (70–80%): ${Math.round(maxHR*0.7)}–${Math.round(maxHR*0.8)} bpm`,
+        `Zone 4 (80–90%): ${Math.round(maxHR*0.8)}–${Math.round(maxHR*0.9)} bpm`,
+        `Zone 5 (90–100%): ${Math.round(maxHR*0.9)}–${maxHR} bpm`
+      ];
+      document.getElementById('result').innerHTML = zones.join('<br>');
+    });
+  </script>
+</body>
