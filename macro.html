@@ -1,0 +1,26 @@
+<form id="macroForm">
+  <label for="calories">Daily Calories:</label>
+  <input type="number" id="calories" required />
+  <label for="goal">Goal:</label>
+  <select id="goal">
+    <option value="balanced">Balanced</option>
+    <option value="lowcarb">Low Carb</option>
+    <option value="highprotein">High Protein</option>
+  </select>
+  <button type="submit">Calculate Macros</button>
+  <div id="result"></div>
+</form>
+<script>
+  document.getElementById('macroForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const cal = +document.getElementById('calories').value;
+    const goal = document.getElementById('goal').value;
+    let protein = 0.3, carbs = 0.4, fat = 0.3;
+    if (goal === 'lowcarb') carbs = 0.2, protein = 0.4, fat = 0.4;
+    if (goal === 'highprotein') protein = 0.5, carbs = 0.3, fat = 0.2;
+    const p = (cal * protein / 4).toFixed(0);
+    const c = (cal * carbs / 4).toFixed(0);
+    const f = (cal * fat / 9).toFixed(0);
+    document.getElementById('result').innerText = `Protein: ${p}g, Carbs: ${c}g, Fat: ${f}g`;
+  });
+</script>
