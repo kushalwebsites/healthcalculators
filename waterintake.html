@@ -1,0 +1,14 @@
+<form id="waterForm">
+  <label for="weight">Weight (kg):</label>
+  <input type="number" id="weight" required />
+  <button type="submit">Calculate Water Intake</button>
+  <div id="result"></div>
+</form>
+<script>
+  document.getElementById('waterForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const weight = +document.getElementById('weight').value;
+    const liters = (weight * 0.033).toFixed(2);
+    document.getElementById('result').innerText = `Recommended Water Intake: ${liters} liters/day`;
+  });
+</script>
