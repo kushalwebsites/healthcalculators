@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Estimate your body fat percentage using this simple Body Fat Calculator." />
+  <title>Body Fat Calculator</title>
+  <style>/* same style as BMI */</style>
+</head>
+<body>
+  <h1>Body Fat Calculator</h1>
+  <form id="bodyFatForm">
+    <label for="waist">Waist (cm):</label>
+    <input type="number" id="waist" required />
+    <label for="neck">Neck (cm):</label>
+    <input type="number" id="neck" required />
+    <label for="height">Height (cm):</label>
+    <input type="number" id="height" required />
+    <label for="gender">Gender:</label>
+    <select id="gender">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+    <div id="hipContainer">
+      <label for="hip">Hip (cm):</label>
+      <input type="number" id="hip" />
+    </div>
+    <button type="submit">Calculate Body Fat %</button>
+    <div id="result"></div>
+  </form>
+  <script>
+    const genderEl = document.getElementById('gender');
+    const hipContainer = document.getElementById('hipContainer');
+    genderEl.addEventListener('change', () => {
+      hipContainer.style.display = genderEl.value === 'female' ? 'block' : 'none';
+    });
+    document.getElementById('bodyFatForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const waist = parseFloat(document.getElementById('waist').value);
+      const neck = parseFloat(document.getElementById('neck').value);
+      const height = parseFloat(document.getElementById('height').value);
+      const hip = parseFloat(document.getElementById('hip').value);
+      const gender = document.getElementById('gender').value;
+
+      let bf = 0;
+      if (gender === 'male') {
+        bf = 495 / (1.0324 - 0.19077 * Math.log10(waist - neck)
+             + 0.15456 * Math.log10(height)) - 450;
+      } else {
+        bf = 495 / (1.29579 - 0.35004 * Math.log10(waist + hip - neck)
+             + 0.22100 * Math.log10(height)) - 450;
+      }
+      document.getElementById('result').innerText = `Estimated Body Fat: ${bf.toFixed(2)}%`;
+    });
+  </script>
+</body>
+</html>
