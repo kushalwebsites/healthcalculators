@@ -1,0 +1,33 @@
+<!-- Same form styling -->
+<body>
+  <h1>TDEE Calculator</h1>
+  <form id="tdeeForm">
+    <!-- Reuse BMR inputs -->
+    <!-- Add activity level -->
+    <label for="activity">Activity Level:</label>
+    <select id="activity">
+      <option value="1.2">Sedentary</option>
+      <option value="1.375">Light</option>
+      <option value="1.55">Moderate</option>
+      <option value="1.725">Very Active</option>
+      <option value="1.9">Super Active</option>
+    </select>
+    <button type="submit">Calculate TDEE</button>
+    <div id="result"></div>
+  </form>
+  <script>
+    document.getElementById('tdeeForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const age = +document.getElementById('age').value;
+      const gender = document.getElementById('gender').value;
+      const weight = +document.getElementById('weight').value;
+      const height = +document.getElementById('height').value;
+      const activity = +document.getElementById('activity').value;
+      let bmr = gender === 'male'
+        ? 10 * weight + 6.25 * height - 5 * age + 5
+        : 10 * weight + 6.25 * height - 5 * age - 161;
+      const tdee = bmr * activity;
+      document.getElementById('result').innerText = `Your TDEE is ${tdee.toFixed(0)} kcal/day.`;
+    });
+  </script>
+</body>
